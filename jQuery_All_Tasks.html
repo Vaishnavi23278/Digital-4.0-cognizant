@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery Exercises</title>
+
+  <!-- jQuery via CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Local jQuery (Uncomment if you have a local copy) -->
+  <!-- <script src="js/jquery-3.6.0.min.js"></script> -->
+
+  <style>
+    .box {
+      width: 100px; height: 100px;
+      margin: 10px; display: inline-block;
+      background-color: lightblue;
+    }
+    #colorBox {
+      width: 100px; height: 100px;
+      background-color: white; border: 1px solid black;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Original Title</h1>
+  <p>First paragraph.</p>
+  <p>Second paragraph.</p>
+  <button id="togglePara">Toggle Paragraph</button>
+
+  <!-- Hello World Section -->
+  <p id="hello">Hello World!</p>
+
+  <!-- Box Controls -->
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <br>
+  <button id="hideBoxes">Hide</button>
+  <button id="showBoxes">Show</button>
+  <button id="fadeOutBoxes">Fade Out</button>
+  <button id="fadeInBoxes">Fade In</button>
+  <button id="toggleBoxes">Toggle</button>
+  <button id="slideBoxes">Slide Up/Down</button>
+
+  <!-- Form Section -->
+  <form id="itemForm">
+    <input type="text" id="itemInput" placeholder="Add item">
+    <button type="submit">Add</button>
+  </form>
+  <button id="removeAll">Remove All</button>
+  <ul id="itemList"></ul>
+
+  <!-- Color Box -->
+  <button id="colorBtn">Change Color</button>
+  <div id="colorBox"></div>
+
+  <!-- Mouse and Keyboard Events -->
+  <div id="eventDiv">Hover or Click Me</div>
+  <input type="text" id="keyInput" placeholder="Type something...">
+
+  <script>
+    $(document).ready(function () {
+      // 1. Hello World
+      console.log($('#hello').text());
+
+      // 2. DOM Ready and Toggle Paragraph
+      $('h1').text('Welcome to jQuery Exercises');
+      $('#togglePara').click(function () {
+        $('p:first').toggle();
+      });
+
+      // 3. jQuery Methods on .box
+      $('#hideBoxes').click(() => $('.box').hide());
+      $('#showBoxes').click(() => $('.box').show());
+      $('#fadeOutBoxes').click(() => $('.box').fadeOut());
+      $('#fadeInBoxes').click(() => $('.box').fadeIn());
+      $('#toggleBoxes').click(() => $('.box').toggle());
+      $('#slideBoxes').click(() => $('.box').slideUp().delay(1000).slideDown());
+
+      // 4. Form Handling
+      $('#itemForm').submit(function (e) {
+        e.preventDefault();
+        const value = $('#itemInput').val();
+        if (value.trim()) {
+          $('#itemList').append('<li>' + value + '</li>');
+          $('#itemInput').val('');
+        }
+      });
+      $('#removeAll').click(() => $('#itemList').empty());
+
+      // 5. Color Box
+      $('#colorBtn').click(() => $('#colorBox').css('background-color', 'red'));
+      $('#colorBox').dblclick(() => $('#colorBox').css('background-color', 'white'));
+
+      // 6. Event Helpers
+      $('#eventDiv')
+        .click(() => alert('Div Clicked'))
+        .dblclick(() => $('#eventDiv').append('<p>Double Clicked!</p>'))
+        .mouseenter(() => $('#eventDiv').css('background-color', '#ddd'))
+        .mouseleave(() => $('#eventDiv').css('background-color', ''));
+
+      $('#keyInput').keypress(function (e) {
+        alert('You pressed: ' + e.key);
+      });
+    });
+  </script>
+</body>
+</html>
